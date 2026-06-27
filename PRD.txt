@@ -1,0 +1,238 @@
+📄 Product Requirements Document (PRD)
+Privacy-First Image Compressor (WordPress Plugin + Page Tool)
+1. Product Overview
+Product Name
+
+Privacy Image Compressor
+
+Access URL
+hamroniti.com/compressor
+Core Idea
+
+A zero-storage, privacy-first image compression tool inside WordPress that allows users to compress images instantly without:
+
+accounts
+tracking
+database storage
+media library storage
+2. Problem Statement
+
+Users need a fast way to compress images without:
+
+uploading to third-party sites
+losing control of files
+leaving behind stored copies
+
+Current tools often:
+
+store files
+require login
+track usage
+limit free usage aggressively
+3. Product Goal
+
+Build a lightweight image compressor page that:
+
+processes images instantly
+returns download immediately
+deletes everything after processing
+stores NOTHING permanently
+4. Target Users
+Bloggers
+Students
+Developers
+SEO users
+Content creators
+5. Core Features (MVP ONLY)
+5.1 Image Upload
+
+Supports:
+
+JPG
+JPEG
+PNG
+WebP
+
+Max size:
+
+20MB
+
+Drag & drop + file picker
+
+5.2 Compression Modes (ONLY TWO)
+Mode 1: Compress by Max Size
+
+User defines:
+
+Target size (KB/MB)
+Example: 500KB
+
+System behavior:
+
+iteratively reduces quality
+resizes image if needed
+stops when target size is reached (or closest possible)
+
+Example:
+
+Input: 4.8MB image
+Target: 500KB
+Output: ~480–520KB
+Mode 2: Compress by Percentage
+
+User defines:
+
+Compression level (% of original quality)
+
+Example:
+
+100% → almost original
+75% → balanced (default)
+50% → strong compression
+30% → aggressive compression
+5.3 Output Handling
+
+After processing:
+
+User gets:
+
+preview (optional)
+file size comparison
+download button
+
+Example:
+
+Original: 4.2 MB
+Compressed: 780 KB
+Saved: 81%
+5.4 File Format Output
+
+Default:
+
+JPG → JPG
+PNG → PNG (or optional WebP conversion internally if needed, but not required in UI)
+5.5 No Storage Policy (CRITICAL)
+System MUST NOT store:
+❌ images
+❌ compressed images
+❌ metadata
+❌ user IP logs
+❌ database records
+Allowed only:
+
+Temporary in-memory or temporary file:
+
+/tmp or PHP memory
+
+Deleted immediately after response:
+
+unlink(file)
+
+or memory cleared automatically
+
+6. User Flow
+User opens /compressor
+        ↓
+Uploads image
+        ↓
+Chooses mode:
+   - Max Size OR
+   - Percentage
+        ↓
+Clicks Compress
+        ↓
+Server processes image temporarily
+        ↓
+Compressed image returned
+        ↓
+File deleted instantly
+7. Technical Architecture
+Plugin Structure
+image-compressor/
+
+├── image-compressor.php
+├── compressor-core.php
+├── upload-handler.php
+├── processor.php
+└── ui-shortcode.php
+8. Processing Engine
+Recommended Libraries
+Imagick (preferred)
+GD (fallback)
+Compression Logic
+Mode 1: Max Size
+while (filesize($image) > target_size) {
+    reduce_quality();
+    maybe_resize();
+}
+Mode 2: Percentage
+quality = user_input_percentage;
+apply_quality(quality);
+9. Frontend UI Requirements
+Layout
+---------------------------------
+ Image Compressor
+---------------------------------
+
+[ Drop image here ]
+
+Mode:
+( ) Max Size
+( ) Percentage
+
+If Max Size:
+[ 500 KB ]
+
+If Percentage:
+[ 75% slider ]
+
+[ Compress Button ]
+
+---------------------------------
+ Result:
+ Original: X MB
+ Compressed: Y KB
+ Save: Z%
+
+ [ Download ]
+---------------------------------
+10. Security Requirements
+validate file MIME type
+block malicious uploads
+limit file size
+sanitize file input
+auto-delete temp files
+11. Performance Requirements
+compression under 5 seconds (10MB file target)
+minimal CPU overhead
+no background jobs required
+12. Constraints
+Must NOT use:
+WordPress Media Library storage
+wp_insert_attachment()
+database logging
+user tracking systems
+external APIs (unless optional later)
+13. Success Criteria
+Users can compress image in < 10 seconds
+0 data retention (verified)
+2 compression modes working reliably
+works on mobile + desktop
+14. Future Enhancements (optional)
+client-side compression (JS WebAssembly)
+batch compression
+AVIF support
+CDN-based processing
+offline PWA tool version
+15. Final Product Definition
+
+A privacy-first WordPress image compressor tool that:
+
+lives at /compressor
+processes images instantly
+offers two compression modes:
+max size
+percentage
+stores absolutely no user data
+behaves like a lightweight utility, not a SaaS backend
+:::
