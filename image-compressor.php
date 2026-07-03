@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Privacy Image Compressor
  * Description:       Privacy-first image compression at /compressor. No storage, no tracking.
- * Version:           1.1.3
+ * Version:           1.2.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            Hamro Niti
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'IC_PLUGIN_VERSION', '1.1.3' );
+define( 'IC_PLUGIN_VERSION', '1.2.0' );
 define( 'IC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'IC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'IC_MAX_BYTES', 20 * 1024 * 1024 );
@@ -23,6 +23,7 @@ require_once IC_PLUGIN_DIR . 'includes/upload.php';
 require_once IC_PLUGIN_DIR . 'includes/compressor.php';
 require_once IC_PLUGIN_DIR . 'includes/processor.php';
 require_once IC_PLUGIN_DIR . 'includes/router.php';
+require_once IC_PLUGIN_DIR . 'includes/seo.php';
 
 /**
  * Main plugin bootstrap.
@@ -31,6 +32,7 @@ final class IC_Plugin {
 
 	public static function init(): void {
 		IC_Router::init();
+		IC_SEO::init();
 	}
 
 	/**

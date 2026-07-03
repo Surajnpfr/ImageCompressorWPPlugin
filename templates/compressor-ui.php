@@ -6,22 +6,19 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-$ic_page_title = __( 'Image Compressor', 'image-compressor' );
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="robots" content="index, follow">
-	<title><?php echo esc_html( $ic_page_title ); ?> — <?php bloginfo( 'name' ); ?></title>
 	<?php wp_head(); ?>
 </head>
 <body class="ic-compressor-page">
+	<a class="ic-skip-link" href="#ic-compressor"><?php esc_html_e( 'Skip to compressor', 'image-compressor' ); ?></a>
 	<main class="ic-compressor" id="ic-compressor">
 		<div class="ic-compressor__card">
 			<header class="ic-compressor__header">
-				<h1 class="ic-compressor__title"><?php echo esc_html( $ic_page_title ); ?></h1>
+				<h1 class="ic-compressor__title"><?php esc_html_e( 'Image Compressor', 'image-compressor' ); ?></h1>
 				<p class="ic-compressor__subtitle"><?php esc_html_e( 'Compress images instantly. Nothing is stored.', 'image-compressor' ); ?></p>
 			</header>
 
@@ -40,7 +37,7 @@ $ic_page_title = __( 'Image Compressor', 'image-compressor' );
 					aria-hidden="true"
 				/>
 				<div class="ic-compressor__dropzone-icon" aria-hidden="true">
-					<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
 						<path d="M12 16V4m0 0L8 8m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
 					</svg>
 				</div>
@@ -139,6 +136,7 @@ $ic_page_title = __( 'Image Compressor', 'image-compressor' );
 
 		<footer class="ic-compressor__footer">
 			<p><?php esc_html_e( 'Images are processed in memory and deleted immediately. Nothing is stored.', 'image-compressor' ); ?></p>
+			<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Back to site', 'image-compressor' ); ?></a></p>
 		</footer>
 	</main>
 	<?php wp_footer(); ?>

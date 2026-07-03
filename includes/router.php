@@ -152,6 +152,7 @@ final class IC_Router {
 		}
 
 		if ( self::is_compress_post() ) {
+			IC_SEO::send_post_robots_header();
 			IC_Processor::handle_compress();
 			exit;
 		}

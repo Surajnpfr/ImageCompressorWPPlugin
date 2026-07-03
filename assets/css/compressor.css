@@ -8,6 +8,41 @@ body.ic-compressor-page {
 	font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
+.ic-skip-link {
+	position: absolute;
+	left: -9999px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.ic-skip-link:focus {
+	left: 16px;
+	top: 16px;
+	width: auto;
+	height: auto;
+	overflow: visible;
+	z-index: 1000;
+	padding: 10px 14px;
+	background: #fff;
+	color: var(--hn-primary, #0d2468);
+	border: 2px solid var(--hn-primary, #0d2468);
+	border-radius: 8px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.ic-compressor__footer a {
+	color: var(--hn-primary, #0d2468);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.ic-compressor__footer a:hover {
+	text-decoration: underline;
+}
+
 .ic-compressor {
 	--ic-primary: var(--hn-primary, #0d2468);
 	--ic-primary-light: var(--hn-primary-light, #1a3a8a);
